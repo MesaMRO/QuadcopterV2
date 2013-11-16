@@ -1,5 +1,6 @@
 # Local build configs
 *.user
+*.txt.user.*
 # Compiled Object files
 *.slo
 *.lo
