@@ -1,22 +1,17 @@
 #ifndef IMU_H
 #define IMU_H
+#include "imu.h"
+#include "mpu9150.h"
+#include "linux_glue.h"
+#include "local_defaults.h"
 
 class IMU
 {
 private:
-    int opt, len;
-    int i2c_bus;
-    int sample_rate;
-    int yaw_mix_factor;
-    int verbose;
-    char *mag_cal_file;
-    char *accel_cal_file;
+    mpudata_t mpudata;
 public:
-    void setIMUparams();
-    void setIMUdebug();
-    void setIMUcal();
-    void initializeIMU();
-    float readIMUdata();
+    IMU(int bus,int rate,int yaw_factor);
+    mpudata_t *getdata();
 };
 
 #endif // IMU_H
