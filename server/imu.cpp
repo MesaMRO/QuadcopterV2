@@ -117,5 +117,4 @@ float IMU::IMUreadZ(){
 }
 IMU::~IMU(){
     mpu9150_exit();
-
 }
