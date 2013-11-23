@@ -26,6 +26,7 @@ public:
     float IMUreadX();
     float IMUreadY();
     float IMUreadZ();
+    ~IMU();
 };
 
 #endif // IMU_H

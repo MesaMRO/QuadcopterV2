@@ -115,3 +115,7 @@ float IMU::IMUreadZ(){
 
     return mpu.fusedEuler[VEC3_Z] * RAD_TO_DEGREE;
 }
+IMU::~IMU(){
+    mpu9150_exit();
+
+}
