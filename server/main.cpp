@@ -14,7 +14,7 @@ int main()
     cout << "I am going to run the IMU" << endl;
     for(int i = 0; i<100; i++){
 
-        cout << "x "<< quad.IMUreadX() <<"y " << quad.IMUreadY() << "z " << quad.IMUreadZ() << endl;
+        cout << " x: "<< quad.IMUreadX() <<" y: " << quad.IMUreadY() << " z: " << quad.IMUreadZ() << endl;
         linux_delay_ms(imuperiod);
     }
     quad.~IMU();

@@ -1,9 +1,12 @@
 #include "imu.h"
+int done;
 
 IMU::IMU(int bus,int rate,int yaw_factor) {
-  int val;
-  char *mag_cal_file = NULL;
-  char *accel_cal_file = NULL;
+    int val;
+    char *mag_cal_file = NULL;
+    char *accel_cal_file = NULL;
+
+    register_sig_handler();
 
     val = mpu9150_init(bus=DEFAULT_I2C_BUS,rate=DEFAULT_SAMPLE_RATE_HZ,yaw_factor=DEFAULT_YAW_MIX_FACTOR);
 
@@ -117,4 +120,23 @@ float IMU::IMUreadZ(){
 }
 IMU::~IMU(){
     mpu9150_exit();
+}
+
+void register_sig_handler()
+{
+    struct sigaction sia;
+
+    bzero(&sia, sizeof sia);
+    sia.sa_handler = sigint_handler;
+
+    if (sigaction(SIGINT, &sia, NULL) < 0) {
+        perror("sigaction(SIGINT)");
+        exit(1);
+    }
+}
+
+
+void sigint_handler(int sig)
+{
+    done = 1;
 }

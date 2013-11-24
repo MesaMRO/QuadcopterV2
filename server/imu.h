@@ -1,8 +1,12 @@
 #ifndef IMU_H
 #define IMU_H
 #include <stdio.h>
+#include <stdint.h>
+#include <stdlib.h>
 #include <string.h>
-
+#include <signal.h>
+#include <getopt.h>
+#include <errno.h>
 
 extern "C"{
 #include "imu.h"
@@ -29,4 +33,6 @@ public:
     ~IMU();
 };
 
+void sigint_handler(int sig);
+void register_sig_handler();
 #endif // IMU_H
