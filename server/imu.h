@@ -27,9 +27,8 @@ private:
 
 public:
     IMU(int bus,int rate,int yaw_factor);
-    float IMUreadX();
-    float IMUreadY();
-    float IMUreadZ();
+    void IMUread(float *vector);
+
     ~IMU();
 };
 

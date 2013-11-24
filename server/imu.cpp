@@ -99,24 +99,14 @@ int IMU::set_cal(int mag, char *cal_file)
     return 0;
 }
 
-float IMU::IMUreadX(){
+void IMU::IMUread(float *vector) {
     memset(&mpu, 0, sizeof(mpudata_t));
+    if (mpu9150_read(&mpu) == 0) {
+        vector[1] = mpu.fusedEuler[VEC3_Y] * RAD_TO_DEGREE;
+        vector[2] = mpu.fusedEuler[VEC3_Y] * RAD_TO_DEGREE;
+        vector[3] = mpu.fusedEuler[VEC3_Z] * RAD_TO_DEGREE;
 
-
-    return mpu.fusedEuler[VEC3_X] * RAD_TO_DEGREE;
-
-}
-
-float IMU::IMUreadY(){
-    memset(&mpu, 0, sizeof(mpudata_t));
-
-    return  mpu.fusedEuler[VEC3_Y] * RAD_TO_DEGREE;
-}
-float IMU::IMUreadZ(){
-    memset(&mpu, 0, sizeof(mpudata_t));
-
-
-    return mpu.fusedEuler[VEC3_Z] * RAD_TO_DEGREE;
+    }
 }
 IMU::~IMU(){
     mpu9150_exit();
